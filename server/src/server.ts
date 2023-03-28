@@ -1,5 +1,6 @@
-import express from "express";
-import morgan from "morgan";
+import *as express from "express";
+import *as morgan from "morgan";
+import { AppDataSource } from "./data-source";
 
 const app = express();
 
@@ -11,4 +12,12 @@ let port = 4000;
 
 app.listen(port,async () => {
     console.log(`Server running at http://localhost:${port}`);
+
+    AppDataSource.initialize().then( () => {
+
+        console.log("Inserting a new user into the database...")
+    
+    }).catch(error => console.log(error))
+
+
 });
